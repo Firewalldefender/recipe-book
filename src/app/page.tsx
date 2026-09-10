@@ -1,7 +1,7 @@
 export default function Home() {
   return (
     <div>
-      <main>Home</main>
+      <h2>Omi´s Rezepte</h2>
     </div>
   );
 }
