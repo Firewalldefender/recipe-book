@@ -11,12 +11,15 @@ const categoryBadgeStyles: Record<string, string> = {
   bread: "border-[#b78c59]/50 bg-[#f4e3cb] text-[#805832]",
 };
 
-const categoryAliases: Record<string, string> = {
-  mexikanisch: "mexican",
-  salat: "salad",
-  nachtisch: "dessert",
-  suppe: "soup",
-  Brot: "bread",
-};
+const recipeCategories = [
+  "mexican",
+  "curry",
+  "pasta",
+  "salad",
+  "dessert",
+  "pizza",
+  "soup",
+  "bread",
+];
 
-export { categoryBadgeStyles, categoryAliases };
+export { categoryBadgeStyles, recipeCategories };
