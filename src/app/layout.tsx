@@ -24,9 +24,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased scheme-light dark:scheme-dark`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="flex flex-col h-screen justify-between bg-[#fff8eb] bg-[image:url('/Global/helles_holz.webp')] text-[#71382d] dark:bg-[#241b17] dark:bg-[image:url('/Global/dunkles_holz.webp')] dark:text-[#f5dfc0]">
         <Header />
         {children}
         <Footer />
