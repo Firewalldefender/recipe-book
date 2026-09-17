@@ -1,8 +1,13 @@
+"use client";
+
 import Link from "next/link";
 import buttonClasses from "../UI/buttonClasses";
 import DarkmodeButton from "./darkmodeButton";
+import { useRouter } from "next/navigation";
 
 export default function Header() {
+  const router = useRouter();
+
   return (
     <header className="sticky top-0 z-50 isolate w-full shrink-0 border-b-2 border-[#71382d]/40 bg-[#fff8eb] shadow-[0_4px_12px_#71382d20] dark:border-[#c99b77]/40 dark:bg-[#241b17]">
       <div
@@ -31,12 +36,23 @@ export default function Header() {
               aria-label="Kategorie"
               defaultValue=""
               className={`${buttonClasses} cursor-pointer appearance-none pr-9 focus:outline-none focus:ring-0 focus-visible:ring-0 sm:pr-10`}
+              onChange={(e) => {
+                const cat = e.target.value;
+                router.push(`/category/${cat}`);
+                router.refresh();
+              }}
             >
               <option value="" disabled>
                 Kategorie
               </option>
               <option value="curry">Curry</option>
               <option value="pasta">Pasta</option>
+              <option value="pizza">Pizza</option>
+              <option value="soup">Suppe</option>
+              <option value="bread">Brot</option>
+              <option value="dessert">Dessert</option>
+              <option value="salad">Salat</option>
+              <option value="mexican">Mexikanisch</option>
             </select>
             <span
               aria-hidden="true"
