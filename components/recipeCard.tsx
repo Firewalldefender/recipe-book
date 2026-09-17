@@ -1,12 +1,12 @@
 import type { Recipe } from "../utils/recipe";
 import Image from "next/image";
 
-import { categoryBadgeStyles, categoryAliases } from "../UI/categoryBadges";
+import { categoryBadgeStyles } from "../UI/categoryBadges";
 
 export default function RecipeCard({ recipe }: { recipe: Recipe }) {
   const category = recipe.category.trim().toLowerCase();
   const badgeStyle =
-    categoryBadgeStyles[categoryAliases[category] ?? category] ??
+    categoryBadgeStyles[category] ??
     "border-[#75815b]/45 bg-[#edf0df] text-[#56633e]";
 
   return (
