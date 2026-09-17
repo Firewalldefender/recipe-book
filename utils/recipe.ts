@@ -22,6 +22,7 @@ const RecipeSchema = z.object({
 const RecipeFormSchema = z.object({
   title: z.string().trim().min(1),
   category: z.string().trim().min(1),
+  image: z.httpUrl().optional(),
   duration: z.coerce.number().int().positive(),
   servings: z.coerce.number().int().positive(),
 });
@@ -54,9 +55,9 @@ const createRecipe = async (
     return { error: "Bitte alle Felder ausfüllen" };
   }
 
-  const { title, category, duration, servings } = result.data;
+  const { title, category, duration, servings, image } = result.data;
 
-  await sql`INSERT INTO recipes (title, category, duration, servings) VALUES (${title}, ${category}, ${duration}, ${servings})`;
+  await sql`INSERT INTO recipes (title, category, duration, servings, image) VALUES (${title}, ${category}, ${duration}, ${servings}, ${image})`;
 
   revalidatePath("/");
 
