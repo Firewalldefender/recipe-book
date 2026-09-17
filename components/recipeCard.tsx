@@ -1,22 +1,7 @@
 import type { Recipe } from "../utils/recipe";
 import Image from "next/image";
 
-const categoryBadgeStyles: Record<string, string> = {
-  mexican:
-    "border-[#52774b]/60 bg-[#fffdf7] text-[#a63e32] after:absolute after:inset-x-0 after:bottom-0 after:h-1 after:bg-[linear-gradient(to_right,#52774b_0%,#52774b_33.33%,#fffdf7_33.33%,#fffdf7_66.66%,#b54b3d_66.66%,#b54b3d_100%)]",
-  curry: "border-[#d28a37]/60 bg-[#ffe3bd] text-[#924615]",
-  pasta: "border-[#c5a044]/60 bg-[#fff0bd] text-[#7d5c1f]",
-  salad: "border-[#32a852]/50 bg-[#87de9f] text-[#56633e]",
-  dessert: "border-[#bd7a83]/50 bg-[#fbe5e8] text-[#913f50]",
-  soup: "border-[#b78c59]/50 bg-[#f4e3cb] text-[#805832]",
-};
-
-const categoryAliases: Record<string, string> = {
-  mexikanisch: "mexican",
-  salat: "salad",
-  nachtisch: "dessert",
-  suppe: "soup",
-};
+import { categoryBadgeStyles, categoryAliases } from "../UI/categoryBadges";
 
 export default function RecipeCard({ recipe }: { recipe: Recipe }) {
   const category = recipe.category.trim().toLowerCase();
@@ -25,10 +10,29 @@ export default function RecipeCard({ recipe }: { recipe: Recipe }) {
     "border-[#75815b]/45 bg-[#edf0df] text-[#56633e]";
 
   return (
-    <article className="flex h-full min-w-0 flex-col rounded-[1.75rem] border-2 border-[#71382d]/35 bg-[#fffaf0] p-5 text-[#71382d] shadow-[0_4px_0_#71382d15,0_8px_24px_#71382d0a] dark:border-[#c99b77]/35 dark:bg-[#30241e] dark:text-[#f5dfc0] transition-shadow hover:shadow-[0_4px_0_#71382d20,0_12px_28px_#71382d15] motion-reduce:transition-none sm:p-6">
-      <div className="grid grid-cols-[minmax(0,1fr)_6rem] items-start gap-4 md:grid-cols-[minmax(0,1fr)_7rem]">
+    <article className="relative isolate flex h-full min-w-0 flex-col overflow-hidden rounded-sm border border-[#d7cda9] bg-[#fffef0] p-5 pt-16 text-[#71382d] shadow-[0_3px_2px_#3f2b1f30,0_14px_28px_#3f2b1f24] transition-[transform,box-shadow] hover:-translate-y-0.5 hover:shadow-[0_4px_3px_#3f2b1f35,0_18px_34px_#3f2b1f2b] motion-reduce:transition-none dark:border-[#927b57] dark:bg-[#d5bf91] dark:text-[#4a2d22] dark:shadow-[0_3px_2px_#00000045,0_14px_30px_#00000038] dark:hover:shadow-[0_4px_3px_#00000050,0_18px_36px_#00000045] sm:p-6 sm:pt-16">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 bottom-0 top-12 -z-10 bg-[repeating-linear-gradient(to_bottom,transparent_0,transparent_31px,#a7d2df_32px,transparent_33px)] dark:bg-[repeating-linear-gradient(to_bottom,transparent_0,transparent_31px,#7399a0_32px,transparent_33px)]"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-10 h-[5px] border-y border-[#df7478] bg-[#f4a4a6]/35 dark:border-[#a84f52] dark:bg-[#bd6c68]/25"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-3 top-0 flex h-8 items-start justify-around"
+      >
+        {Array.from({ length: 11 }).map((_, index) => (
+          <span
+            key={index}
+            className="relative h-6 w-3 before:absolute before:left-1/2 before:top-0 before:h-3 before:w-1 before:-translate-x-1/2 before:bg-[#765d46] before:content-[''] after:absolute after:bottom-0 after:left-0 after:size-3 after:rounded-full after:bg-[#765d46] after:shadow-[inset_1px_1px_1px_#493526,0_1px_0_#fff8d8] after:content-[''] dark:before:bg-[#4f3d2d] dark:after:bg-[#4f3d2d] dark:after:shadow-[inset_1px_1px_1px_#2d2118,0_1px_0_#e5d1a5]"
+          />
+        ))}
+      </div>
+      <div className="relative z-10 grid grid-cols-[minmax(0,1fr)_6rem] items-start gap-4 md:grid-cols-[minmax(0,1fr)_7rem]">
         <div className="min-w-0">
-          <h2 className="font-serif text-2xl leading-tight font-bold wrap-break-word text-[#a64b38] dark:text-[#efa98a] lg:text-3xl">
+          <h2 className="font-serif text-2xl leading-tight font-bold wrap-break-word text-[#a64b38] dark:text-[#7b372c] lg:text-3xl">
             {recipe.title}
           </h2>
           <span
@@ -37,7 +41,7 @@ export default function RecipeCard({ recipe }: { recipe: Recipe }) {
             {recipe.category}
           </span>
         </div>
-        <div className="relative aspect-square overflow-hidden rounded-2xl border border-[#71382d]/20 bg-[#f1e6cd] shadow-inner dark:border-[#c99b77]/25 dark:bg-[#443328]">
+        <div className="relative aspect-square overflow-hidden rounded-2xl border border-[#71382d]/20 bg-[#f1e6cd] shadow-inner dark:border-[#4a2d22]/30 dark:bg-[#c6ae7f]">
           {recipe.image ? (
             <Image
               src={recipe.image}
@@ -47,7 +51,7 @@ export default function RecipeCard({ recipe }: { recipe: Recipe }) {
               className="object-cover"
             />
           ) : (
-            <div className="flex h-full flex-col items-center justify-center gap-2 text-[#947655] dark:text-[#cfad87]">
+            <div className="flex h-full flex-col items-center justify-center gap-2 text-[#947655] dark:text-[#694e3d]">
               <svg
                 aria-hidden="true"
                 viewBox="0 0 48 48"
@@ -68,15 +72,15 @@ export default function RecipeCard({ recipe }: { recipe: Recipe }) {
           )}
         </div>
       </div>
-      <dl className="mt-auto space-y-2 pt-5 text-sm sm:text-base">
-        <div className="flex items-baseline justify-between gap-3 border-t border-dashed border-[#71382d]/25 pt-4 dark:border-[#c99b77]/25">
-          <dt className="text-[#876858] dark:text-[#cbb098]">Arbeitszeit</dt>
+      <dl className="relative z-10 mt-auto space-y-2 pt-5 text-sm sm:text-base">
+        <div className="flex items-baseline justify-between gap-3 pt-4">
+          <dt className="text-[#876858] dark:text-[#694e3d]">Arbeitszeit</dt>
           <dd className="text-right font-bold tabular-nums">
             {recipe.duration} min
           </dd>
         </div>
         <div className="flex items-baseline justify-between gap-3">
-          <dt className="text-[#876858] dark:text-[#cbb098]">Portionen</dt>
+          <dt className="text-[#876858] dark:text-[#694e3d]">Portionen</dt>
           <dd className="text-right font-bold tabular-nums">
             {recipe.servings}
           </dd>
